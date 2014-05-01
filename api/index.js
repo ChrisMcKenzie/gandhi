@@ -77,14 +77,14 @@ module.exports = function(config, app, components){
 		var response = {};
 		_.each(req.files, function(file){
 
-			console.log(file)
+			console.log(req.body)
 
 			var data = fs.readFileSync(file.path);
 
 			// TODO: hash the file
 
 			response[file.fieldName] = {
-				path: '/files/' + Date.now() + '-' + file.originalFilename
+				path: '/files/' + Date.now() + req.body.prefix + '-' + file.originalFilename
 			};
 
 			fs.writeFileSync(__dirname + response[file.fieldName].path);
